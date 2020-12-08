@@ -1,4 +1,4 @@
-var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+//var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 
 var newYorkCoords = [-115.814, 32.7488333];
@@ -15,7 +15,7 @@ var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_wee
 
 //var tecPlates = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
 
-var tecPlates = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
+//var tecPlates = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 var myMap = L.map("map", {
     center: [32.7488333,-115.814],
     zoom: mapZoomLevel
@@ -96,7 +96,7 @@ erthQuakeMarkers.push(L.circle([location.geometry.coordinates[1], location.geome
     // Setting our circle's radius equal to the output of our markerSize function
     // This will make our marker's size proportionate to its population
     radius: location.properties.mag*10000
-  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "</h3>"));
+  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "<br>Sig: " + location.properties.sig + "</h3>"));
   //erthQuakeMarkers.addTo(myMap);
 
   L.circle([location.geometry.coordinates[1], location.geometry.coordinates[0]], {
@@ -106,7 +106,7 @@ erthQuakeMarkers.push(L.circle([location.geometry.coordinates[1], location.geome
     // Setting our circle's radius equal to the output of our markerSize function
     // This will make our marker's size proportionate to its population
     radius: location.properties.mag*10000
-  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "</h3>").addTo(myMap);
+  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "<br>Sig: " + location.properties.sig + "</h3>").addTo(myMap);
  }
 
   

@@ -96,7 +96,7 @@ erthQuakeMarkers.push(L.circle([location.geometry.coordinates[1], location.geome
     // Setting our circle's radius equal to the output of our markerSize function
     // This will make our marker's size proportionate to its population
     radius: location.properties.mag*10000
-  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "<br>Sig: " + location.properties.sig + "</h3>"));
+  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "</h3>"));
   //erthQuakeMarkers.addTo(myMap);
 
   L.circle([location.geometry.coordinates[1], location.geometry.coordinates[0]], {
@@ -106,7 +106,7 @@ erthQuakeMarkers.push(L.circle([location.geometry.coordinates[1], location.geome
     // Setting our circle's radius equal to the output of our markerSize function
     // This will make our marker's size proportionate to its population
     radius: location.properties.mag*10000
-  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "<br>Sig: " + location.properties.sig + "</h3>").addTo(myMap);
+  }).bindPopup("<h1> Location:" + location.properties.place + "</h1> <hr> <h3>Magnitude: " + location.properties.mag + "</h3>").addTo(myMap);
  }
 
   
@@ -136,7 +136,7 @@ d3.json(tecPlates, function (response) {
         console.log(location.geometry.coordinates)
         var lat = 0;
         var lng = 0;
-
+        if (location.properties.Type !== "subdctsdfsdfion") {
          
             latlngList= [];
             for ( var j = 0; j<location.geometry.coordinates.length; j++) {
@@ -162,8 +162,7 @@ d3.json(tecPlates, function (response) {
                 // Setting our circle's radius equal to the output of our markerSize function
                 // This will make our marker's size proportionate to its population
                 //radius: location.properties.mag*10000
-              }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + " <br>Type:" + location.type + " <br>Source:" + location.properties.Source + "</h3>"));
-              
+              }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + "</h3>"));
               L.polyline([latlngList], {
                 color: "yellow",
                 thick: "10"
@@ -172,26 +171,30 @@ d3.json(tecPlates, function (response) {
                 // Setting our circle's radius equal to the output of our markerSize function
                 // This will make our marker's size proportionate to its population
                 //radius: location.properties.mag*10000
-              //}).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + "</h3>").addTo(myMap);
-            }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + " <br>Type:" + location.type + " <br>Source:" + location.properties.Source + "</h3>").addTo(myMap);
-             
-        /*
-        //This also worked as requested by reviewer
-              var myLines = [{
-                "type": "LineString",
-                "coordinates": [latlngList]
-            }];
-            
-            var myStyle = {
-                "color": "#ff7800",
-                "weight": 5,
-                "opacity": 0.65
-            };
-            
-            L.geoJSON(myLines, {
-                style: myStyle
-            }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + " Type:" + location.type + " Source:" + location.properties.Source + "</h3>").addTo(myMap);
-*/
+              }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + "</h3>").addTo(myMap);
+              
+        
+        } else {
+            tectonicLines.push(L.polyline([location.geometry.coordinates], {
+                color: "yellow",
+                thick: "10"
+                //fillOpacity: opac,
+                //fillColor: cl,
+                // Setting our circle's radius equal to the output of our markerSize function
+                // This will make our marker's size proportionate to its population
+                //radius: location.properties.mag*10000
+              }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + " Type:" + location.properties.Name + "</h3>"));
+              L.polyline([location.geometry.coordinates], {
+                color: "yellow",
+                thick: "10"
+                //fillOpacity: opac,
+                //fillColor: cl,
+                // Setting our circle's radius equal to the output of our markerSize function
+                // This will make our marker's size proportionate to its population
+                //radius: location.properties.mag*10000
+              }).bindPopup("<h1> Layer:" + location.properties.LAYER + "</h1><h3> Name:" + location.properties.Name + "</h3>").addTo(myMap);
+        }
+
     }
    
      
